@@ -64,6 +64,12 @@ BEGIN_MESSAGE_MAP(CCalculatorDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON_3, &CCalculatorDlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON_7, &CCalculatorDlg::OnBnClickedButton7)
+	ON_BN_CLICKED(IDC_BUTTON_0, &CCalculatorDlg::OnBnClickedButton0)
+	ON_BN_CLICKED(IDC_BUTTON_1, &CCalculatorDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_2, &CCalculatorDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON_4, &CCalculatorDlg::OnBnClickedButton4)
 END_MESSAGE_MAP()
 
 
@@ -152,3 +158,42 @@ HCURSOR CCalculatorDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+
+
+void CCalculatorDlg::OnBnClickedButton7()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalculatorDlg::OnBnClickedButton0()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalculatorDlg::OnBnClickedButton1()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalculatorDlg::OnBnClickedButton2()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+}
+
+void CCalculatorDlg::OnBnClickedButton3()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+
+void CCalculatorDlg::OnBnClickedButton4()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
