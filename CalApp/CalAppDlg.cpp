@@ -2,24 +2,24 @@
 // CalAppDlg.cpp : 구현 파일
 //
 
-#include "stdafx.h"
-#include "CalApp.h"
-#include "CalAppDlg.h"
-#include "afxdialogex.h"
+#include "stdafx.h" //자주 쓰이는 헤더들 여러 개를 한꺼번에 미리 컴파일 해놓아서 나중에 다시 컴파일하지 않고 그냥 다시 쓰겠다는 헤더이다. 
+#include "CalApp.h" //앱성성으로 생긴 해더
+#include "CalAppDlg.h" // 앱생성으로 생긴 다이얼로그 해더
+#include "afxdialogex.h" //??
 #define plu 1 //이게 그냥더하고 뺴기를 하면 더하고뺴지지가않아서 상수로 정의해야함.
 #define sub 2 
 #define mul 3 //일단따라하고있는데 #define으로 하면 효율이좀다른가? 일반 함수로선언했을떄와 차이점
-#define div 4
+#define div 4 
 
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
+#ifdef _DEBUG //디버그 매크로 지원입니다.컴파일러가 기본적으로 지원되지않더라도 사용자가 만들어 사용할수있습니다.
+#define new DEBUG_NEW //새로운디버그생성 define~~~이런식으로 설정할수있다.
+#endif   // 디버그 지정끝
 
 
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
 
-class CAboutDlg : public CDialogEx //범위지정연산자로 상속받는거이다.
+class CAboutDlg : public CDialogEx  // syntax class~:public CdialogEx는 배경색과 배경이미지를 정합니다.
 {
 public:
 	CAboutDlg();
@@ -37,7 +37,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
+CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX) //:: scope 지정함수호출자 CaboutDlg에 있는 CAbutydig함수호출 
 {
 }
 
