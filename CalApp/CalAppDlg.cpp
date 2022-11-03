@@ -3,7 +3,7 @@
 //
 
 #include "stdafx.h" //자주 쓰이는 헤더들 여러 개를 한꺼번에 미리 컴파일 해놓아서 나중에 다시 컴파일하지 않고 그냥 다시 쓰겠다는 헤더이다. 
-#include "CalApp.h" //앱성성으로 생긴 해더
+#include "CalApp.h" //  해당 응용 프로그램의 기본 헤더 파일입니다.
 #include "CalAppDlg.h" // 앱생성으로 생긴 다이얼로그 해더
 #include "afxdialogex.h" //??
 #define plu 1 //이게 그냥더하고 뺴기를 하면 더하고뺴지지가않아서 상수로 정의해야함.
@@ -25,29 +25,31 @@ public:
 	CAboutDlg();
 
 // 대화 상자 데이터입니다.
-#ifdef AFX_DESIGN_TIME
+#ifdef AFX_DESIGN_TIME 
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
+	virtual void DoDataExchange(CDataExchange* pDX);   /* 다이얼로그 기반으로 컨트롤을 변수로 사용하고 싶다면 변수와 컨트롤 사이엥 주고값는 값이 일어나야한다.dataexchange의 줄임말로 dodataexchange함수다값을교환한다. CDataExchange DDV데이터유효검사를한다.	   */
+
 
 // 구현입니다.
 protected:
-	DECLARE_MESSAGE_MAP()
+	DECLARE_MESSAGE_MAP() //메시지 맵이 클래스에서 메시지를 함수에 매핑하는 데 사용됨을 선언합니다(클래스 선언에 사용해야 합니다).
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX) //:: scope 지정함수호출자 CaboutDlg에 있는 CAbutydig함수호출 
 {
 }
 
-void CAboutDlg::DoDataExchange(CDataExchange* pDX)
+void CAboutDlg::DoDataExchange(CDataExchange* pDX) 
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-END_MESSAGE_MAP()
+BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)//메시지 맵의 정의를 시작합니다(클래스 구현에서 사용해야 합니다).
+END_MESSAGE_MAP() //메시지 맵의 정의를 종료합니다(클래스 구현에서 사용해야 합니다)
+
 
 
 // CCalAppDlg 대화 상자
@@ -73,22 +75,22 @@ void CCalAppDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CCalAppDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
-	ON_WM_PAINT()
+	ON_WM_PAINT() //              
 	ON_WM_QUERYDRAGICON()
 END_MESSAGE_MAP()
 
 
 // CCalAppDlg 메시지 처리기
 
-BOOL CCalAppDlg::OnInitDialog()
+BOOL CCalAppDlg::OnInitDialog() //다이럴로그 init
 {
 	CDialogEx::OnInitDialog();
 
 	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
 
 	// IDM_ABOUTBOX는 시스템 명령 범위에 있어야 합니다.
-	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
-	ASSERT(IDM_ABOUTBOX < 0xF000);
+	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX); //디버깅모드에서 조건에 대한 검증을 위해서 사용합니다. assert(조건) //0xFFF0런타임오류?
+	ASSERT(IDM_ABOUTBOX < 0xF000); //  16진수  0xf000보다 작다
 
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
 	if (pSysMenu != NULL)
