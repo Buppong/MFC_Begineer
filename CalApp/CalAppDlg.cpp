@@ -242,6 +242,8 @@ void CCalAppDlg::OnBnClickedButton3()
 			result = op1 / op2;
 			break;
 
+		
+
 	}
 
 	m_result.Format(_T("%f"), result);
