@@ -59,32 +59,55 @@ END_MESSAGE_MAP() //메시지 맵의 정의를 종료합니다(클래스 구현에서 사용해야 합니�
 CCalAppDlg::CCalAppDlg(CWnd* pParent /*=NULL*/) //CCalapp다이얼로그앱안에 Cwnd윈도우함수앱으로 로딩한다는 뜻 
 	: CDialogEx(IDD_CALAPP_DIALOG, pParent)  //
 	, m_result(_T(""))
+	, Result_View(_T(""))
 {
 
 
 
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_bEqulClk = false; //'='클릭 생성자함수 초기화
 }
 
 void CCalAppDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX); //대화상자색체나 이런거 하는클래스
-	//  DDX_Control(pDX, IDC_EDIT_RESULT, m_result);
-	DDX_Text(pDX, m_result);
+									//  DDX_Control(pDX, IDC_EDIT_RESULT, m_result);
+
+	DDX_Text(pDX, IDC_EDIT_RESULT, Result_View);
 }
 
-BEGIN_MESSAGE_MAP(CCalAppDlg, CDialogEx)
-	ON_WM_SYSCOMMAND()
-	ON_WM_PAINT() //              
-	ON_WM_QUERYDRAGICON()
+BEGIN_MESSAGE_MAP(CCalAppDlg, CDialogEx) //메시지맵을 설정합니다.
+	ON_WM_SYSCOMMAND() //사용자메시지등록
+	ON_WM_PAINT() //     이미정의된메시지를 처리해야함         
+	ON_WM_QUERYDRAGICON() //최소화된(아이콘적인) 창으로 전송됩니다. 사용자가 창을 끌려고 하지만 해당 클래스에 대해 정의된 아이콘이 없습니다. 응용 프로그램은 아이콘이나 커서에 대한 핸들을 반환할 수 있습니다. 시스템은 사용자가 아이콘을 끄는 동안 이 커서 또는 아이콘을 표시합니다.
+	ON_BN_CLICKED(IDC_BUTTON_0, &CCalAppDlg::OnBnClickedButton0) // 컨트롤을 눌러서 WM_COMMAND 메시지가 발생하였다면 IPram 변수에는 이메시지를 발생한 컨트롤 HWND값이 저장됩니다.
+	ON_BN_CLICKED(IDC_BUTTON_1, &CCalAppDlg::OnBnClickedButton1) // 버튼은 사실 wm_command가 발생하고 이메시지와 함께 상위16비트 하위 16비트 iparam버튼의핸들값에 전달이됩니다. On_Control 으로바꿔줘도됩니다.
+	ON_BN_CLICKED(IDC_BUTTON_3, &CCalAppDlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON_4, &CCalAppDlg::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON_5, &CCalAppDlg::OnBnClickedButton5)
+	ON_BN_CLICKED(IDC_BUTTON_6, &CCalAppDlg::OnBnClickedButton6)
+	ON_BN_CLICKED(IDC_BUTTON_7, &CCalAppDlg::OnBnClickedButton7)
+	ON_BN_CLICKED(IDC_BUTTON_8, &CCalAppDlg::OnBnClickedButton8)
+	ON_BN_CLICKED(IDC_BUTTON_9, &CCalAppDlg::OnBnClickedButton9) 
+	ON_BN_CLICKED(IDC_BUTTON_10, &CCalAppDlg::OnBnClickedButton10)
+	ON_BN_CLICKED(IDC_BUTTON_11, &CCalAppDlg::OnBnClickedButton11)
+	ON_BN_CLICKED(IDC_BUTTON_12, &CCalAppDlg::OnBnClickedButton12)
+	ON_BN_CLICKED(IDC_BUTTON_13, &CCalAppDlg::OnBnClickedButton13)
+	ON_BN_CLICKED(IDC_BUTTON_14, &CCalAppDlg::OnBnClickedButton14)
+	ON_BN_CLICKED(IDC_BUTTON_15, &CCalAppDlg::OnBnClickedButton15)
+	ON_BN_CLICKED(IDC_BUTTON_16, &CCalAppDlg::OnBnClickedButton16)
+	ON_BN_CLICKED(IDC_BUTTON_17, &CCalAppDlg::OnBnClickedButton17)
+	ON_BN_CLICKED(IDC_BUTTON_18, &CCalAppDlg::OnBnClickedButton18)
+	ON_BN_CLICKED(IDC_BUTTON_19, &CCalAppDlg::OnBnClickedButton19)
+	ON_EN_CHANGE(IDC_EDIT_RESULT, &CCalAppDlg::OnEnChangeEditResult)
 END_MESSAGE_MAP()
 
 
 // CCalAppDlg 메시지 처리기
 
-BOOL CCalAppDlg::OnInitDialog() //다이럴로그 init
+BOOL CCalAppDlg::OnInitDialog() //다이얼로그 초기화 함수
 {
-	CDialogEx::OnInitDialog();
+	CDialogEx::OnInitDialog(); //
 
 	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
 
@@ -92,16 +115,16 @@ BOOL CCalAppDlg::OnInitDialog() //다이럴로그 init
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX); //디버깅모드에서 조건에 대한 검증을 위해서 사용합니다. assert(조건) //0xFFF0런타임오류?
 	ASSERT(IDM_ABOUTBOX < 0xF000); //  16진수  0xf000보다 작다
 
-	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	CMenu* pSysMenu = GetSystemMenu(FALSE); //응용프로그램이 복사수정을 위해 메뉴에 액세스할수있도록합니다.
 	if (pSysMenu != NULL)
 	{
-		BOOL bNameValid;
+		BOOL bNameValid; 
 		CString strAboutMenu;
-		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
+		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX); //어플리케이션의 문자열 리소르를 가져다쓰려면 LoadString을 호출해야합니다.
 		ASSERT(bNameValid);
 		if (!strAboutMenu.IsEmpty())
 		{
-			pSysMenu->AppendMenu(MF_SEPARATOR);
+			pSysMenu->AppendMenu(MF_SEPARATOR);//appendMenu지정된 메뉴 모음 드롭다운메뉴 하위메뉴 바로가기 메뉴의끝에 새항목을 추가합니다. 이기능을사용하여 메뉴항목의 내용 ,모양 동작을 지정할수있습니다. MF_SEPARATOR 구분선입니다.
 			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 		}
 	}
@@ -112,6 +135,9 @@ BOOL CCalAppDlg::OnInitDialog() //다이럴로그 init
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	CString str;
+	str.Format(_T("계산기")); 
+	SetWindowText(str);
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -139,10 +165,11 @@ void CCalAppDlg::OnPaint()
 	{
 		CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
-		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
+		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0); 
+		// WM_ICONERASEBKGND 메시지 최소화 된 창으로 보내집니다 ,
 
 		// 클라이언트 사각형에서 아이콘을 가운데에 맞춥니다.
-		int cxIcon = GetSystemMetrics(SM_CXICON);
+		int cxIcon = GetSystemMetrics(SM_CXICON); // 
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
 		GetClientRect(&rect);
@@ -165,3 +192,209 @@ HCURSOR CCalAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+
+//계산기 버튼관련된 코드
+
+void CCalAppDlg::OnBnClickedButton0()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("0"); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+
+}
+
+
+void CCalAppDlg::OnBnClickedButton1()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("."); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+}
+
+
+void CCalAppDlg::OnBnClickedButton3()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	double op1, op2, result;
+
+	op1 = _tstof(m_buf); //변환하는명령어
+	op2 = _tstof(m_result);
+
+	switch (m_cType) {
+		case plu:
+			result = op1 + op2; //더하기
+			break;
+		case mul:
+			result = op1 * op2;
+		case div:
+			result = op1 / op2;
+			break;
+
+	}
+
+	m_result.Format(_T("%f"), result);
+	UpdateData(false);
+	m_bEqulClk = true;
+
+}
+
+
+void CCalAppDlg::OnBnClickedButton4()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("1"); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+}
+
+
+void CCalAppDlg::OnBnClickedButton5()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("2"); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+}
+
+
+void CCalAppDlg::OnBnClickedButton6()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("03"); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+}
+
+
+void CCalAppDlg::OnBnClickedButton7()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("4"); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+}
+
+
+void CCalAppDlg::OnBnClickedButton8()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_bEqulClk) {
+		m_result.Empty();
+		m_bEqulClk = false;
+	}
+
+	m_result += _T("5"); //문자 0기억
+	UpdateData(false); //변수에있는것을 컨트롤에 대입(화면출력)
+}
+
+
+void CCalAppDlg::OnBnClickedButton9()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton10()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton11()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton12()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton13()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton14()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton15()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+} 
+
+
+
+//리셋버튼
+void CCalAppDlg::OnBnClickedButton16()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//m_result += T("");
+	m_result.Empty();
+	UpdateData(false); //변수 => 컨트롤에 출력
+}
+
+
+void CCalAppDlg::OnBnClickedButton17()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton18()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnBnClickedButton19()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CCalAppDlg::OnEnChangeEditResult()
+{
+	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
+	// CDialogEx::OnInitDialog() 함수를 재지정 
+	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
+	// 이 알림 메시지를 보내지 않습니다.
+
+	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
