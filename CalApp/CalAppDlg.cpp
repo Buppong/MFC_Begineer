@@ -24,12 +24,12 @@ class CAboutDlg : public CDialogEx  // syntax class~:public CdialogEx는 배경색과
 public:
 	CAboutDlg();
 
-// 대화 상자 데이터입니다.
+	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME 
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);   /* 다이얼로그 기반으로 컨트롤을 변수로 사용하고 싶다면 변수와 컨트롤 사이엥 주고값는 값이 일어나야한다.dataexchange의 줄임말로 dodataexchange함수다값을교환한다. CDataExchange DDV데이터유효검사를한다.	   */
 
 
@@ -42,7 +42,7 @@ CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX) //:: scope 지정함수호출자 Cabou
 {
 }
 
-void CAboutDlg::DoDataExchange(CDataExchange* pDX) 
+void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
@@ -88,7 +88,7 @@ BEGIN_MESSAGE_MAP(CCalAppDlg, CDialogEx) //메시지맵을 설정합니다.
 	ON_BN_CLICKED(IDC_BUTTON_6, &CCalAppDlg::OnBnClickedButton6)
 	ON_BN_CLICKED(IDC_BUTTON_7, &CCalAppDlg::OnBnClickedButton7)
 	ON_BN_CLICKED(IDC_BUTTON_8, &CCalAppDlg::OnBnClickedButton8)
-	ON_BN_CLICKED(IDC_BUTTON_9, &CCalAppDlg::OnBnClickedButton9) 
+	ON_BN_CLICKED(IDC_BUTTON_9, &CCalAppDlg::OnBnClickedButton9)
 	ON_BN_CLICKED(IDC_BUTTON_10, &CCalAppDlg::OnBnClickedButton10)
 	ON_BN_CLICKED(IDC_BUTTON_11, &CCalAppDlg::OnBnClickedButton11)
 	ON_BN_CLICKED(IDC_BUTTON_12, &CCalAppDlg::OnBnClickedButton12)
@@ -118,7 +118,7 @@ BOOL CCalAppDlg::OnInitDialog() //다이얼로그 초기화 함수
 	CMenu* pSysMenu = GetSystemMenu(FALSE); //응용프로그램이 복사수정을 위해 메뉴에 액세스할수있도록합니다.
 	if (pSysMenu != NULL)
 	{
-		BOOL bNameValid; 
+		BOOL bNameValid;
 		CString strAboutMenu;
 		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX); //어플리케이션의 문자열 리소르를 가져다쓰려면 LoadString을 호출해야합니다.
 		ASSERT(bNameValid);
@@ -135,8 +135,8 @@ BOOL CCalAppDlg::OnInitDialog() //다이얼로그 초기화 함수
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-	CString str;
-	str.Format(_T("계산기")); 
+	CString str = L"";
+	str.Format(_T("계산기"));
 	SetWindowText(str);
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
@@ -165,7 +165,7 @@ void CCalAppDlg::OnPaint()
 	{
 		CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
-		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0); 
+		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 		// WM_ICONERASEBKGND 메시지 최소화 된 창으로 보내집니다 ,
 
 		// 클라이언트 사각형에서 아이콘을 가운데에 맞춥니다.
@@ -232,17 +232,19 @@ void CCalAppDlg::OnBnClickedButton3()
 	op1 = _tstof(m_buf); //변환하는명령어
 	op2 = _tstof(m_result);
 
-	switch (m_cType) {
-		case plu:
-			result = op1 + op2; //더하기
-			break;
-		case mul:
-			result = op1 * op2;
-		case div:
-			result = op1 / op2;
-			break;
+	switch (m_cType)
+	{
 
-		
+	case plu:
+		result = op1 + op2; //더하기
+		break;
+	case mul:
+		result = op1 * op2;
+	case div:
+		result = op1 / op2;
+		break;
+
+
 
 	}
 
@@ -359,7 +361,7 @@ void CCalAppDlg::OnBnClickedButton14()
 void CCalAppDlg::OnBnClickedButton15()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-} 
+}
 
 
 
@@ -376,7 +378,7 @@ void CCalAppDlg::OnBnClickedButton16()
 void CCalAppDlg::OnBnClickedButton17()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-}
+                       }
 
 
 void CCalAppDlg::OnBnClickedButton18()
