@@ -23,7 +23,7 @@ class CAboutDlg : public CDialogEx  // syntax class~:public CdialogEx는 배경색과
 {
 public:
 	CAboutDlg();
-
+	 
 	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME 
 	enum { IDD = IDD_ABOUTBOX };

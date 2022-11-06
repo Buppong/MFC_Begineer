@@ -22,16 +22,11 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
 public:
-	CString m_buf; // editcontrol 문자 임시로기억하는 숫자멤버벼변수
-	CString m_result; //에디트 컨트롤 변수
-	bool m_bEqulClk;
-	int m_cType;
-
+	afx_msg void OnBnClickOk();
 
 // 구현입니다.
 protected:
 	HICON m_hIcon;
-
 	// 생성된 메시지 맵 함수
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
