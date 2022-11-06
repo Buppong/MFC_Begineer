@@ -23,7 +23,7 @@ class CAboutDlg : public CDialogEx  // syntax class~:public CdialogEx는 배경색과
 {
 public:
 	CAboutDlg();
-	 
+
 	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME 
 	enum { IDD = IDD_ABOUTBOX };
@@ -378,7 +378,7 @@ void CCalAppDlg::OnBnClickedButton16()
 void CCalAppDlg::OnBnClickedButton17()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-                       }
+}
 
 
 void CCalAppDlg::OnBnClickedButton18()

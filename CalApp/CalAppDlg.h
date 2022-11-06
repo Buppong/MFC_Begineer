@@ -6,7 +6,7 @@
 #include "afxwin.h"
 
 
-// CCalAppDlg 대화 상자
+// CCalAppDlg 대화 상자//
 class CCalAppDlg : public CDialogEx
 {
 // 생성입니다.
