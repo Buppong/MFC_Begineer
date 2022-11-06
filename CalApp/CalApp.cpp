@@ -10,7 +10,7 @@
 #define new DEBUG_NEW
 #endif
 
-////
+////////
 // CCalAppApp
 
 BEGIN_MESSAGE_MAP(CCalAppApp, CWinApp)
