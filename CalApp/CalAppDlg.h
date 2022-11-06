@@ -23,7 +23,7 @@ public:
 
 public:
 	afx_msg void OnBnClickOk();
-	void OnSetNum1(UINT a_ctrl_id);
+	void OnSetNum(UINT a_ctrl_id);
 // 구현입니다.
 protected:
 	HICON m_hIcon;
