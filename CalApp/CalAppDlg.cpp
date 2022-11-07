@@ -76,6 +76,12 @@ void CCalAppDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_RESULT, Result_View);
 }
 
+void CCalAppDlg::OnSetNum(UINT a_ctrl_id)
+{
+	SetDlgItemInt(IDC_EDIT_RESULT, a_ctrl_id);
+
+}
+
 BEGIN_MESSAGE_MAP(CCalAppDlg, CDialogEx) //메시지맵을 설정합니다.
 	ON_WM_SYSCOMMAND() //사용자메시지등록
 	ON_WM_PAINT() //     이미정의된메시지를 처리해야함         
