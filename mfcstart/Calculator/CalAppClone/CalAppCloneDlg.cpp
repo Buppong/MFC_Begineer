@@ -168,6 +168,8 @@ void CCalAppCloneDlg::OnBnClickedOk()
 // 버튼그룹화
 void CCalAppCloneDlg::OnSetNum(UINT a_ctrl_id)
 {
-	SetDlgItemInt(IDC_SHOW_NUM_EDIT, a_ctrl_id);
+
+	int num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
+	SetDlgItemInt(IDC_SHOW_NUM_EDIT, num * 10 + a_ctrl_id - IDC_BUTTON0);
 }
 
