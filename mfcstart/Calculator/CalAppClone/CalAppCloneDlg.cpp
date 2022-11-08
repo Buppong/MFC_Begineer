@@ -19,12 +19,12 @@ class CAboutDlg : public CDialogEx
 public:
 	CAboutDlg();
 
-// 대화 상자 데이터입니다.
+	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 // 구현입니다.
@@ -66,6 +66,10 @@ BEGIN_MESSAGE_MAP(CCalAppCloneDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CCalAppCloneDlg::OnBnClickedOk)
 	ON_COMMAND_RANGE(IDC_BUTTON0, IDC_BUTTON9, OnSetNum)
+	ON_COMMAND_RANGE(IDC_OP_ADD, IDC_OP_DIV_BTN, OnProcessOp)
+	ON_BN_CLICKED(IDC_CLEAR_BTN, &CCalAppCloneDlg::OnBnClickedClearBtn) //함수썼을때 이거에 추가를해야실행이된다.
+	ON_BN_CLICKED(IDC_OP_EQU_BTN, &CCalAppCloneDlg::OnBnClickedOpEquBtn)
+	ON_BN_CLICKED(IDC_BACK_BTN, &CCalAppCloneDlg::OnBnClickedBackBtn)
 END_MESSAGE_MAP()
 
 
@@ -99,8 +103,12 @@ BOOL CCalAppCloneDlg::OnInitDialog()
 	//  프레임워크가 이 작업을 자동으로 수행합니다.
 	SetIcon(m_hIcon, TRUE);			// 큰 아이콘을 설정합니다.
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
+	m_font.CreatePointFont(200, L"굴림");
+	GetDlgItem(IDC_SHOW_NUM_EDIT)->SetFont(&m_font);
+	SetDlgItemInt(IDC_SHOW_NUM_EDIT, 0); //버튼관련해서 설정하는 함수
 
-	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+
+// TODO: 여기에 추가 초기화 작업을 추가합니다.
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -170,6 +178,41 @@ void CCalAppCloneDlg::OnSetNum(UINT a_ctrl_id)
 {
 
 	int num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
-	SetDlgItemInt(IDC_SHOW_NUM_EDIT, num * 10 + a_ctrl_id - IDC_BUTTON0);
+
+	if (m_reset_mode == 0) {
+		SetDlgItemInt(IDC_SHOW_NUM_EDIT, num * 10 + a_ctrl_id - IDC_BUTTON0);
+	} else {
+		m_reset_mode = 0;
+		SetDlgItemInt(IDC_SHOW_NUM_EDIT, a_ctrl_id - IDC_BUTTON0);
+	}
 }
 
+
+
+void CCalAppCloneDlg::OnBnClickedClearBtn()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	SetDlgItemInt(IDC_SHOW_NUM_EDIT, 0);
+}
+
+
+void CCalAppCloneDlg::OnBnClickedOpEquBtn()
+{
+
+}
+
+
+
+void CCalAppCloneDlg::OnProcessOp(UINT a_ctrl_id) {
+
+	m_op_flag = a_ctrl_id - IDC_OP_ADD +1 ;
+	m_reset_mode = 1;
+}
+
+
+void CCalAppCloneDlg::OnBnClickedBackBtn()
+{
+	int num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
+	SetDlgItemInt(IDC_SHOW_NUM_EDIT, num /10);
+
+}
