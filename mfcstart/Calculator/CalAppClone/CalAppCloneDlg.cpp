@@ -202,11 +202,13 @@ void CCalAppCloneDlg::OnBnClickedOpEquBtn()
 }
 
 
-
 void CCalAppCloneDlg::OnProcessOp(UINT a_ctrl_id) {
 
-	m_op_flag = a_ctrl_id - IDC_OP_ADD +1 ;
-	m_reset_mode = 1;
+	if (m_reset_mode == 0) {
+		m_op_flag = a_ctrl_id - IDC_OP_ADD + 1;
+		m_reset_mode = 1;
+		m_num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
+	}
 }
 
 
