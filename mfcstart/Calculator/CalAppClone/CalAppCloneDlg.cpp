@@ -186,6 +186,7 @@ void CCalAppCloneDlg::OnSetNum(UINT a_ctrl_id)
 		m_reset_mode = 0;
 		SetDlgItemInt(IDC_SHOW_NUM_EDIT, a_ctrl_id - IDC_BUTTON0);
 	}
+
 }
 
 
@@ -220,6 +221,7 @@ void CCalAppCloneDlg::OnBnClickedOpEquBtn()
 
 	}
 	SetDlgItemInt(IDC_SHOW_NUM_EDIT, result);
+	
 }
 
 
@@ -239,3 +241,6 @@ void CCalAppCloneDlg::OnBnClickedBackBtn()
 	SetDlgItemInt(IDC_SHOW_NUM_EDIT, num / 10);
 
 }
+
+
+
