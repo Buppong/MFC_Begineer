@@ -13,7 +13,7 @@ private:
 	CFont m_font;
 	char m_op_flag = 0;// 0-> 연산자 선택안함, 1 -> ADD ,2 ->SUB, 3 -> MUL ,4 -> DIV// 생성입니다.
 	char m_reset_mode = 0;
-	int m_num = 0;
+	int m_first_num = 0;
 public:
 	CCalAppCloneDlg(CWnd* pParent = NULL);	// 표준 생성자입니다.
 

@@ -181,7 +181,8 @@ void CCalAppCloneDlg::OnSetNum(UINT a_ctrl_id)
 
 	if (m_reset_mode == 0) {
 		SetDlgItemInt(IDC_SHOW_NUM_EDIT, num * 10 + a_ctrl_id - IDC_BUTTON0);
-	} else {
+	}
+	else {
 		m_reset_mode = 0;
 		SetDlgItemInt(IDC_SHOW_NUM_EDIT, a_ctrl_id - IDC_BUTTON0);
 	}
@@ -198,7 +199,27 @@ void CCalAppCloneDlg::OnBnClickedClearBtn()
 
 void CCalAppCloneDlg::OnBnClickedOpEquBtn()
 {
+	int second_num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
+	int result = 0;
+	switch (m_op_flag)
+	{
+	case 1: //ADD
+		result = m_first_num + second_num;
+		break;
+	case 2: //SUB
+		result = m_first_num - second_num;
+		break;
+	case 3: //MUL
+		result = m_first_num * second_num;
+		break;
+	case 4: //DIV
+		if (second_num != 0) {
+			result = m_first_num / second_num;
+		}
+		break;
 
+	}
+	SetDlgItemInt(IDC_SHOW_NUM_EDIT, result);
 }
 
 
@@ -207,7 +228,7 @@ void CCalAppCloneDlg::OnProcessOp(UINT a_ctrl_id) {
 	if (m_reset_mode == 0) {
 		m_op_flag = a_ctrl_id - IDC_OP_ADD + 1;
 		m_reset_mode = 1;
-		m_num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
+		m_first_num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
 	}
 }
 
@@ -215,6 +236,6 @@ void CCalAppCloneDlg::OnProcessOp(UINT a_ctrl_id) {
 void CCalAppCloneDlg::OnBnClickedBackBtn()
 {
 	int num = GetDlgItemInt(IDC_SHOW_NUM_EDIT);
-	SetDlgItemInt(IDC_SHOW_NUM_EDIT, num /10);
+	SetDlgItemInt(IDC_SHOW_NUM_EDIT, num / 10);
 
 }
