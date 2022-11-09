@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="hellowin_standard.cpp" />
     <ClCompile Include="mfc익히기.cpp" />
     <ClCompile Include="생성자소멸.cpp" />
     <ClCompile Include="소스1.cpp" />
